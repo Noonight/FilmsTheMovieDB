@@ -2,4 +2,5 @@
     <string name="app_name">FilmsTheMovieDB</string>
     <string name="put_your_api_key">Write your api key</string>
     <string name="send">Send</string>
+    <string name="mock_data">Mock data here</string>
 </resources>

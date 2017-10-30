@@ -2,6 +2,7 @@ package com.example.admin.filmsthemoviedb.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -21,6 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkManager {
 
+    public static final String API_KEY = "6ef8fac92d0f608902ec99ae9ca02f5b";
+
     private OkHttpClient mOkHttpClient;
     private ApiService mApiService;
     private SharedPreferences mSharedPreferences;
@@ -28,14 +31,19 @@ public class NetworkManager {
     public NetworkManager(Context context) {
         mSharedPreferences = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
+        setApiKey(API_KEY);
+
         mOkHttpClient = new OkHttpClient().newBuilder().addNetworkInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
+
                 HttpUrl originalUrl = chain.request().url();
 
                 HttpUrl url = originalUrl.newBuilder()
                         .addQueryParameter("api_key", mSharedPreferences.getString("api_key", ""))
+                        .addQueryParameter("page", mSharedPreferences.getString("page", "2"))
                         .build();
+                Log.d("DEBUG", String.valueOf(url));
                 Request.Builder requestBuilder = chain.request().newBuilder()
                         .url(url);
                 Request request = requestBuilder.build();
@@ -62,5 +70,13 @@ public class NetworkManager {
 
     public ApiService getApiService() {
         return mApiService;
+    }
+
+    public String getPage() {
+        return mSharedPreferences.getString("page", "");
+    }
+
+    public void setPage(String page) {
+        mSharedPreferences.edit().putString("page", page).apply();
     }
 }

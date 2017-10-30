@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Admin on 28.10.2017.
  */
 
-class MovieResponseBody {
+public class MovieResponseBody {
     @SerializedName("vote_count")
     private long mVoteCount;
     @SerializedName("id")

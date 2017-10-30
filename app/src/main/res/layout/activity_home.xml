@@ -7,20 +7,9 @@
     android:orientation="vertical"
     tools:context="com.example.admin.filmsthemoviedb.HomeActivity">
 
-    <EditText
-        android:id="@+id/api_key_et"
-        android:hint="@string/put_your_api_key"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/send_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/send"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/request_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </android.widget.LinearLayout>
