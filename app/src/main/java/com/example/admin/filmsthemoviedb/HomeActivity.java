@@ -54,7 +54,9 @@ public class HomeActivity extends AppCompatActivity {
         mNetworkManager.getApiService().getPopularMovie().enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                mRequestRecycler.setAdapter(new MovieAdapter(response.body()));
+                MovieAdapter adapter = new MovieAdapter(response.body());
+                subscAdapter(adapter);
+                mRequestRecycler.setAdapter(adapter);
             }
 
             @Override
@@ -62,5 +64,9 @@ public class HomeActivity extends AppCompatActivity {
                 Log.e(TAG, t.getMessage());
             }
         });
+    }
+
+    void subscAdapter(MovieAdapter adater) {
+        adater.subscribeActivity(this);
     }
 }

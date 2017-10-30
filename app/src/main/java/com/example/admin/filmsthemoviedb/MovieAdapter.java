@@ -1,6 +1,7 @@
 package com.example.admin.filmsthemoviedb;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,10 +23,15 @@ import butterknife.ButterKnife;
 
 class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
+    private HomeActivity activity;
     private MovieResponse mMovie;
 
     public MovieAdapter(MovieResponse body) {
         mMovie = body;
+    }
+
+    public void subscribeActivity(HomeActivity activity) {
+        this.activity = activity;
     }
 
     @Override
@@ -43,9 +49,15 @@ class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
                 .load( IMAGE_URL + mMovie.getmResults().get(position).getmPosterPath())
                 .into(holder.mIvListItemPoster);
         holder.mEtListItemTitle.setText(mMovie.getmResults().get(position).getmTitle());
-        holder.itemView.setOnClickListener(view -> {
-            Log.d("DEBUG", "click on " + position);
-        });
+        /*holder.itemView.setOnClickListener(view -> {
+
+            Intent intent = new Intent(activity, MovieActivity.class);
+            intent.putExtra(
+                    mMovie.getmResults().get(position).getClass().getCanonicalName()
+                    , mMovie.getmResults().get(position)
+            );
+            activity.startActivity(intent);
+        });*/
     }
 
     @Override

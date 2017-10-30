@@ -41,7 +41,7 @@ public class NetworkManager {
 
                 HttpUrl url = originalUrl.newBuilder()
                         .addQueryParameter("api_key", mSharedPreferences.getString("api_key", ""))
-                        .addQueryParameter("page", mSharedPreferences.getString("page", "2"))
+                        .addQueryParameter("page", mSharedPreferences.getString("page", "1"))
                         .build();
                 Log.d("DEBUG", String.valueOf(url));
                 Request.Builder requestBuilder = chain.request().newBuilder()
