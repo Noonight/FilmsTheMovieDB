@@ -1,18 +1,13 @@
 package com.example.admin.filmsthemoviedb.api;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
+import com.example.admin.filmsthemoviedb.common.Log;
 import com.google.gson.Gson;
 
-import java.io.IOException;
-
 import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -24,8 +19,8 @@ public class NetworkManager {
     private ApiService mApiService;
     private SharedPreferences mSharedPreferences;
 
-    public NetworkManager(Context context) {
-        mSharedPreferences = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
+    public NetworkManager(/*Context context*/) {
+        //mSharedPreferences = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
         setApiKey(API_KEY);
 
@@ -37,7 +32,7 @@ public class NetworkManager {
                     .addQueryParameter("api_key", mSharedPreferences.getString("api_key", ""))
                     //.addQueryParameter("page", mSharedPreferences.getString("page", "1"))
                     .build();
-            Log.d("DEBUG", String.valueOf(url));
+            Log.d(String.valueOf(url));
             Request.Builder requestBuilder = chain.request().newBuilder()
                     .url(url);
             Request request = requestBuilder.build();
@@ -53,13 +48,13 @@ public class NetworkManager {
         mApiService = retrofit.create(ApiService.class);
     }
 
-    public void setApiKey(String apiKey) {
+    private void setApiKey(String apiKey) {
         mSharedPreferences.edit().putString("api_key", apiKey).apply();
     }
 
-    public String getApiKey() {
+    /*public String getApiKey() {
         return mSharedPreferences.getString("api_key", "");
-    }
+    }*/
 
     public ApiService getApiService() {
         return mApiService;

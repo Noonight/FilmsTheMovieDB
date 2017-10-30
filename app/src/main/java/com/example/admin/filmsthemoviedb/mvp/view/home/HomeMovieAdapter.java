@@ -1,8 +1,6 @@
-package com.example.admin.filmsthemoviedb.view.home;
+package com.example.admin.filmsthemoviedb.mvp.view.home;
 
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,8 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.admin.filmsthemoviedb.R;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponse;
-import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
-import com.example.admin.filmsthemoviedb.view.movie.MovieActivity;
+import com.example.admin.filmsthemoviedb.mvp.view.movie.MovieActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

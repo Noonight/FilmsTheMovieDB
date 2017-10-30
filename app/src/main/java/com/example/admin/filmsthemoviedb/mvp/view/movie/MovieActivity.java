@@ -1,4 +1,4 @@
-package com.example.admin.filmsthemoviedb.view.movie;
+package com.example.admin.filmsthemoviedb.mvp.view.movie;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import com.example.admin.filmsthemoviedb.api.NetworkManager;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
 import com.example.admin.filmsthemoviedb.api.model.MovieResponse;
 import com.example.admin.filmsthemoviedb.common.Log;
-import com.example.admin.filmsthemoviedb.view.home.HomeMovieAdapter;
+import com.example.admin.filmsthemoviedb.mvp.view.home.HomeMovieAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,13 +40,17 @@ public class MovieActivity extends AppCompatActivity {
 
     private void init() {
         movie = (MoviePopularResponseBody) getIntent().getSerializableExtra(this.getClass().getCanonicalName());
-        mNetworkManager = new NetworkManager(this);
+        mNetworkManager = new NetworkManager();
     }
 
     private void bindView() {
         ButterKnife.bind(this);
 
         getData();
+    }
+
+    private void setData() {
+        //mEtMovieTitle.setText();
     }
 
     private void getData() {

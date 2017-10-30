@@ -1,4 +1,4 @@
-package com.example.admin.filmsthemoviedb.view.home;
+package com.example.admin.filmsthemoviedb.mvp.view.home;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.example.admin.filmsthemoviedb.R;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponse;
 import com.example.admin.filmsthemoviedb.api.NetworkManager;
-import com.example.admin.filmsthemoviedb.view.movie.MovieActivity;
+import com.example.admin.filmsthemoviedb.mvp.view.movie.MovieActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,16 +38,16 @@ public class HomeActivity extends AppCompatActivity {
 
     private void init() {
         mRequestRecycler.setLayoutManager(new LinearLayoutManager(this));
-        mNetworkManager = new NetworkManager(this);
+        mNetworkManager = new NetworkManager();
         showData();
     }
 
     private void showData() {
-        if (!mNetworkManager.getApiKey().isEmpty()) {
+        //if (!mNetworkManager.getApiKey().isEmpty()) {
             getData();
-        } else {
-            Toast.makeText(this, "Not found api_key", Toast.LENGTH_SHORT).show();
-        }
+        //} else {
+            //Toast.makeText(this, "Not found api_key", Toast.LENGTH_SHORT).show();
+        //}
     }
 
     private void getData() {

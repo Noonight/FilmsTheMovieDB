@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.admin.filmsthemoviedb.view.movie.MovieActivity">
+    tools:context=".mvp.view.movie.MovieActivity">
 
     <TextView
         android:id="@+id/movie_title_tv"
