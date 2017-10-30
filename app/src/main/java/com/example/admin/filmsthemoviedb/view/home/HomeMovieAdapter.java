@@ -1,32 +1,31 @@
-package com.example.admin.filmsthemoviedb;
+package com.example.admin.filmsthemoviedb.view.home;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.admin.filmsthemoviedb.api.MovieResponse;
-import com.example.admin.filmsthemoviedb.api.MovieResponseBody;
-
-import java.util.ArrayList;
+import com.example.admin.filmsthemoviedb.R;
+import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponse;
+import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
+import com.example.admin.filmsthemoviedb.view.movie.MovieActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
+public class HomeMovieAdapter extends RecyclerView.Adapter<HomeMovieAdapter.ViewHolder> {
 
     private HomeActivity activity;
-    private MovieResponse mMovie;
+    private MoviePopularResponse mMovie;
 
-    public MovieAdapter(MovieResponse body) {
+    public HomeMovieAdapter(MoviePopularResponse body) {
         mMovie = body;
     }
 
@@ -49,25 +48,18 @@ class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
                 .load( IMAGE_URL + mMovie.getmResults().get(position).getmPosterPath())
                 .into(holder.mIvListItemPoster);
         holder.mEtListItemTitle.setText(mMovie.getmResults().get(position).getmTitle());
-        /*holder.itemView.setOnClickListener(view -> {
+        holder.itemView.setOnClickListener(view -> {
 
-            Intent intent = new Intent(activity, MovieActivity.class);
-            intent.putExtra(
-                    mMovie.getmResults().get(position).getClass().getCanonicalName()
-                    , mMovie.getmResults().get(position)
-            );
-            activity.startActivity(intent);
-        });*/
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(MovieActivity.class.getCanonicalName(), mMovie.getmResults().get(position));
+
+            activity.startMovieActivity(bundle);
+        });
     }
 
     @Override
     public int getItemCount() {
         return mMovie.getmResults().size();
-    }
-
-    private void openMovieActivity(MovieResponseBody responseBody) {
-        Bundle args = new Bundle();
-
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

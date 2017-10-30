@@ -1,14 +1,10 @@
-package com.example.admin.filmsthemoviedb.api;
+package com.example.admin.filmsthemoviedb.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by Admin on 28.10.2017.
- */
-
-public class MovieResponse {
+public class MoviePopularResponse {
 
     @SerializedName("page")
     private long mPage;
@@ -17,7 +13,7 @@ public class MovieResponse {
     @SerializedName("total_pages")
     private long mTotalPages;
     @SerializedName("results")
-    private List<MovieResponseBody> mResults;
+    private List<MoviePopularResponseBody> mResults;
 
     public long getmPage() {
         return mPage;
@@ -43,11 +39,11 @@ public class MovieResponse {
         this.mTotalPages = mTotalPages;
     }
 
-    public List<MovieResponseBody> getmResults() {
+    public List<MoviePopularResponseBody> getmResults() {
         return mResults;
     }
 
-    public void setmResults(List<MovieResponseBody> mResults) {
+    public void setmResults(List<MoviePopularResponseBody> mResults) {
         this.mResults = mResults;
     }
 }

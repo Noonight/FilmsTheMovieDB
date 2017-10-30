@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.admin.filmsthemoviedb.MovieActivity">
+    android:orientation="vertical"
+    tools:context="com.example.admin.filmsthemoviedb.view.movie.MovieActivity">
 
     <TextView
         android:id="@+id/movie_title_tv"
@@ -13,7 +14,14 @@
         android:textColor="#fff"
         android:gravity="center"
         android:textSize="25sp"
+        android:layout_marginTop="4dp"
         android:padding="6dp"
+        android:text="@string/mock_data"
         android:background="@color/colorPrimary"/>
+
+    <ImageView
+        android:id="@+id/movie_post_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </android.widget.LinearLayout>

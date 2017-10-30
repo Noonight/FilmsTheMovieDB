@@ -1,20 +1,20 @@
-package com.example.admin.filmsthemoviedb;
+package com.example.admin.filmsthemoviedb.view.home;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.admin.filmsthemoviedb.api.MovieResponse;
+import com.example.admin.filmsthemoviedb.R;
+import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponse;
 import com.example.admin.filmsthemoviedb.api.NetworkManager;
+import com.example.admin.filmsthemoviedb.view.movie.MovieActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,22 +51,28 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        mNetworkManager.getApiService().getPopularMovie().enqueue(new Callback<MovieResponse>() {
+        mNetworkManager.getApiService().getPopularMovieByPage(1).enqueue(new Callback<MoviePopularResponse>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                MovieAdapter adapter = new MovieAdapter(response.body());
+            public void onResponse(Call<MoviePopularResponse> call, Response<MoviePopularResponse> response) {
+                HomeMovieAdapter adapter = new HomeMovieAdapter(response.body());
                 subscAdapter(adapter);
                 mRequestRecycler.setAdapter(adapter);
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<MoviePopularResponse> call, Throwable t) {
                 Log.e(TAG, t.getMessage());
             }
         });
     }
 
-    void subscAdapter(MovieAdapter adater) {
+    public void startMovieActivity(Bundle bundle) {
+        Intent intent = new Intent(this, MovieActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    void subscAdapter(HomeMovieAdapter adater) {
         adater.subscribeActivity(this);
     }
 }

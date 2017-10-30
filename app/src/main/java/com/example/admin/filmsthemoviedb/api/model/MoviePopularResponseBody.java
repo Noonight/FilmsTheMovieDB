@@ -1,22 +1,19 @@
-package com.example.admin.filmsthemoviedb.api;
+package com.example.admin.filmsthemoviedb.api.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.List;
 
-/**
- * Created by Admin on 28.10.2017.
- */
-
-public class MovieResponseBody implements Parcelable {
+public class MoviePopularResponseBody implements Serializable {
     @SerializedName("vote_count")
     private long mVoteCount;
     @SerializedName("id")
-    private long mId;
+    private int mId;
     @SerializedName("video")
     private boolean mVideo;
     @SerializedName("vote_average")
@@ -42,34 +39,6 @@ public class MovieResponseBody implements Parcelable {
     @SerializedName("release_date")
     private String mReleaseDate;
 
-    protected MovieResponseBody(Parcel in) {
-        mVoteCount = in.readLong();
-        mId = in.readLong();
-        mVideo = in.readByte() != 0;
-        mVoteAverage = in.readDouble();
-        mTitle = in.readString();
-        mPopilarity = in.readDouble();
-        mPosterPath = in.readString();
-        mOriginalLanguage = in.readString();
-        mOriginalTitle = in.readString();
-        mBackdropPath = in.readString();
-        mAdult = in.readByte() != 0;
-        mOverview = in.readString();
-        mReleaseDate = in.readString();
-    }
-
-    public static final Creator<MovieResponseBody> CREATOR = new Creator<MovieResponseBody>() {
-        @Override
-        public MovieResponseBody createFromParcel(Parcel in) {
-            return new MovieResponseBody(in);
-        }
-
-        @Override
-        public MovieResponseBody[] newArray(int size) {
-            return new MovieResponseBody[size];
-        }
-    };
-
     public long getmVoteCount() {
         return mVoteCount;
     }
@@ -78,11 +47,11 @@ public class MovieResponseBody implements Parcelable {
         this.mVoteCount = mVoteCount;
     }
 
-    public long getmId() {
+    public int getmId() {
         return mId;
     }
 
-    public void setmId(long mId) {
+    public void setmId(int mId) {
         this.mId = mId;
     }
 
@@ -180,16 +149,5 @@ public class MovieResponseBody implements Parcelable {
 
     public void setmReleaseDate(String mReleaseDate) {
         this.mReleaseDate = mReleaseDate;
-    }
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
     }
 }
