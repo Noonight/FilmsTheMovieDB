@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'realm-android'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 26
@@ -41,7 +41,9 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
 
     compile 'com.jakewharton:butterknife:8.6.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    //annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    kapt 'com.jakewharton:butterknife-compiler:8.6.0'
+    //it's working for realm database
 
     compile 'com.github.bumptech.glide:glide:4.2.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
