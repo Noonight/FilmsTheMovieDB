@@ -11,7 +11,7 @@ public final class Log {
     }
 
     public static void d(String msg) {
-        android.util.Log.d(getLocation(),/* getLocation() + */msg);
+        android.util.Log.d(getLocation(),/* getLocation() + */msg + " ---------------------------------------------------- ");
     }
 
     private static String getLocation() {

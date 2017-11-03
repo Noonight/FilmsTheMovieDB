@@ -3,4 +3,5 @@
     <string name="put_your_api_key">Write your api key</string>
     <string name="send">Send</string>
     <string name="mock_data">Mock data here</string>
+    <string name="please_wait">Please wait ...</string>
 </resources>

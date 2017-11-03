@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".mvp.view.home.HomeActivity">
+    tools:context=".mvp.view.home.PopularMovieActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/request_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <include layout="@layout/loading_view"/>
 
 </android.widget.LinearLayout>

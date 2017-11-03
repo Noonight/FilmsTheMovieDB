@@ -12,7 +12,7 @@ import com.example.admin.filmsthemoviedb.api.NetworkManager;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
 import com.example.admin.filmsthemoviedb.api.model.MovieResponse;
 import com.example.admin.filmsthemoviedb.common.Log;
-import com.example.admin.filmsthemoviedb.mvp.view.home.HomeMovieAdapter;
+import com.example.admin.filmsthemoviedb.mvp.view.home.PopularMovieAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,7 +61,7 @@ public class MovieActivity extends AppCompatActivity {
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 mEtMovieTitle.setText(response.body().getMTitle());
                 Glide.with(mIvMoviePost)
-                        .load(HomeMovieAdapter.IMAGE_URL + response.body().getMPosterPath())
+                        .load(PopularMovieAdapter.IMAGE_URL + response.body().getMPosterPath())
                         .into(mIvMoviePost);
             }
 

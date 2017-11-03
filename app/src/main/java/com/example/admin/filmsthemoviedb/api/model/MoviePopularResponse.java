@@ -2,6 +2,7 @@ package com.example.admin.filmsthemoviedb.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MoviePopularResponse {
@@ -14,6 +15,13 @@ public class MoviePopularResponse {
     private long mTotalPages;
     @SerializedName("results")
     private List<MoviePopularResponseBody> mResults;
+
+    public ArrayList<MoviePopularResponseBody> getResult() {
+        if (mResults == null)  {
+            return new ArrayList<>();
+        }
+        return (ArrayList<MoviePopularResponseBody>) mResults;
+    }
 
     public long getmPage() {
         return mPage;

@@ -12,21 +12,26 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.admin.filmsthemoviedb.R;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponse;
+import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
 import com.example.admin.filmsthemoviedb.mvp.view.movie.MovieActivity;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeMovieAdapter extends RecyclerView.Adapter<HomeMovieAdapter.ViewHolder> {
+public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapter.ViewHolder> {
 
-    private HomeActivity activity;
+    private PopularMovieActivity activity;
     private MoviePopularResponse mMovie;
 
-    public HomeMovieAdapter(MoviePopularResponse body) {
-        mMovie = body;
+    private final ArrayList<MoviePopularResponseBody> mMovies;
+
+    public PopularMovieAdapter() {
+        mMovies = new ArrayList<>();
     }
 
-    public void subscribeActivity(HomeActivity activity) {
+    public void subscribeActivity(PopularMovieActivity activity) {
         this.activity = activity;
     }
 
@@ -42,21 +47,27 @@ public class HomeMovieAdapter extends RecyclerView.Adapter<HomeMovieAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         Glide
                 .with(holder.itemView)
-                .load( IMAGE_URL + mMovie.getmResults().get(position).getmPosterPath())
+                .load( IMAGE_URL + mMovies.get(position).getmPosterPath())
                 .into(holder.mIvListItemPoster);
-        holder.mEtListItemTitle.setText(mMovie.getmResults().get(position).getmTitle());
+        holder.mEtListItemTitle.setText(mMovies.get(position).getmTitle());
         holder.itemView.setOnClickListener(view -> {
 
             Bundle bundle = new Bundle();
-            bundle.putSerializable(MovieActivity.class.getCanonicalName(), mMovie.getmResults().get(position));
+            bundle.putSerializable(MovieActivity.class.getCanonicalName(), mMovies.get(position));
 
             activity.startMovieActivity(bundle);
         });
     }
 
+    public void setData(ArrayList<MoviePopularResponseBody> newMovies) {
+        mMovies.clear();
+        mMovies.addAll(newMovies);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
-        return mMovie.getmResults().size();
+        return mMovies.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

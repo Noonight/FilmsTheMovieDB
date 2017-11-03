@@ -9,6 +9,7 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkManager {
@@ -22,14 +23,15 @@ public class NetworkManager {
     public NetworkManager(/*Context context*/) {
         //mSharedPreferences = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
-        setApiKey(API_KEY);
+        //setApiKey(API_KEY);
 
         mOkHttpClient = new OkHttpClient().newBuilder().addNetworkInterceptor(chain -> {
 
             HttpUrl originalUrl = chain.request().url();
 
             HttpUrl url = originalUrl.newBuilder()
-                    .addQueryParameter("api_key", mSharedPreferences.getString("api_key", ""))
+                    //.addQueryParameter("api_key", mSharedPreferences.getString("api_key", ""))
+                    .addQueryParameter("api_key", API_KEY)
                     //.addQueryParameter("page", mSharedPreferences.getString("page", "1"))
                     .build();
             Log.d(String.valueOf(url));
@@ -42,6 +44,7 @@ public class NetworkManager {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/3/")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .client(mOkHttpClient)
                 .build();
