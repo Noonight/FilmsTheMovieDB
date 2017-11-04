@@ -10,12 +10,12 @@ import io.realm.rx.RealmObservableFactory;
 
 public class App extends Application {
 
-    private static Context mContext;
+    private static App mInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext = this;
+        mInstance = this;
 
         initializeRealm();
     }
@@ -28,7 +28,7 @@ public class App extends Application {
         Realm.setDefaultConfiguration(realmConfiguration);
     }
 
-    public static Context getContext() {
-        return mContext;
+    public static App getAppContext() {
+        return mInstance;
     }
 }

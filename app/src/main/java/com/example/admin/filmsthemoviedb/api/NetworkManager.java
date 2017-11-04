@@ -20,11 +20,7 @@ public class NetworkManager {
     private ApiService mApiService;
     private SharedPreferences mSharedPreferences;
 
-    public NetworkManager(/*Context context*/) {
-        //mSharedPreferences = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
-
-        //setApiKey(API_KEY);
-
+    public NetworkManager() {
         mOkHttpClient = new OkHttpClient().newBuilder().addNetworkInterceptor(chain -> {
 
             HttpUrl originalUrl = chain.request().url();
@@ -50,14 +46,6 @@ public class NetworkManager {
                 .build();
         mApiService = retrofit.create(ApiService.class);
     }
-
-    private void setApiKey(String apiKey) {
-        mSharedPreferences.edit().putString("api_key", apiKey).apply();
-    }
-
-    /*public String getApiKey() {
-        return mSharedPreferences.getString("api_key", "");
-    }*/
 
     public ApiService getApiService() {
         return mApiService;

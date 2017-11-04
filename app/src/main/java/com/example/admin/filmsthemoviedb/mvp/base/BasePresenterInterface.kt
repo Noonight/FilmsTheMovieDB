@@ -1,7 +1,7 @@
 package com.example.admin.filmsthemoviedb.mvp.base
 
 
-interface BasePresenter {
+interface BasePresenterInterface {
 
     fun attachView(baseView: BaseView)
 
