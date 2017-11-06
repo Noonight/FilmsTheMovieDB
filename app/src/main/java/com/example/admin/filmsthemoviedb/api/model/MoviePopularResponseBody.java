@@ -9,9 +9,14 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.List;
 
-public class MoviePopularResponseBody implements Serializable {
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class MoviePopularResponseBody extends RealmObject implements Serializable {
     @SerializedName("vote_count")
-    private long mVoteCount;
+    private int mVoteCount;
+    @PrimaryKey
     @SerializedName("id")
     private int mId;
     @SerializedName("video")
@@ -29,7 +34,7 @@ public class MoviePopularResponseBody implements Serializable {
     @SerializedName("original_title")
     private String mOriginalTitle;
     @SerializedName("genre_ids")
-    private List<Long> mGenreIds;
+    private RealmList<RealmLong> mGenreIds;
     @SerializedName("backdrop_path")
     private String mBackdropPath;
     @SerializedName("adult")
@@ -39,11 +44,11 @@ public class MoviePopularResponseBody implements Serializable {
     @SerializedName("release_date")
     private String mReleaseDate;
 
-    public long getmVoteCount() {
+    public int getmVoteCount() {
         return mVoteCount;
     }
 
-    public void setmVoteCount(long mVoteCount) {
+    public void setmVoteCount(int mVoteCount) {
         this.mVoteCount = mVoteCount;
     }
 
@@ -111,11 +116,11 @@ public class MoviePopularResponseBody implements Serializable {
         this.mOriginalTitle = mOriginalTitle;
     }
 
-    public List<Long> getmGenreIds() {
+    public RealmList<RealmLong> getmGenreIds() {
         return mGenreIds;
     }
 
-    public void setmGenreIds(List<Long> mGenreIds) {
+    public void setmGenreIds(RealmList<RealmLong> mGenreIds) {
         this.mGenreIds = mGenreIds;
     }
 

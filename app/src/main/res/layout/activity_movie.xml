@@ -7,21 +7,30 @@
     android:orientation="vertical"
     tools:context=".mvp.view.movie.MovieActivity">
 
-    <TextView
-        android:id="@+id/movie_title_tv"
+    <LinearLayout
+        android:id="@+id/movie_detail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:layout_marginTop="4dp"
-        android:padding="6dp"
-        android:text="@string/mock_data"
-        android:background="@color/colorPrimary"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/movie_post_iv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/movie_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:layout_marginTop="4dp"
+            android:padding="6dp"
+            android:text="@string/mock_data"
+            android:background="@color/colorPrimary"/>
+
+        <ImageView
+            android:id="@+id/movie_post_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <include layout="@layout/loading_view"/>
 
 </android.widget.LinearLayout>

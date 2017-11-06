@@ -1,62 +1,65 @@
 package com.example.admin.filmsthemoviedb.api.model
 
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmList
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 
 
-data class MovieResponse(
-        @SerializedName("adult") val mAdult: Boolean,
-        @SerializedName("backdrop_path") val mBackdropPath: String,
-        @SerializedName("belongs_to_collection") val mBelongsToCollection: MovieCollection,
-        @SerializedName("budget") val mBudget: Long,
-        @SerializedName("genres") val mGenres: List<MovieGenres>,
-        @SerializedName("homepage") val mHomePage: String,
-        @SerializedName("id") val mId: Long,
-        @SerializedName("imdb_id") val mImdbId: String,
-        @SerializedName("original_language") val mLanguage: String,
-        @SerializedName("original_title") val mOriginalTitle: String,
-        @SerializedName("overview") val mOverview: String,
-        @SerializedName("popularity") val mPopularity: Double,
-        @SerializedName("poster_path") val mPosterPath: String,
-        @SerializedName("production_companies") val mMovieProductionCompanies: List<MovieProductionCompanies>,
-        @SerializedName("production_countries") val movieProductionCuntries: List<MovieProductionCuntries>,
-        @SerializedName("release_date") val mReleaseDate: String,
-        @SerializedName("revenue") val mRevenue: Long,
-        @SerializedName("runtime") val mRuntime: Long,
-        @SerializedName("spoken_language") val mMovieSpokenLanguage: List<MovieSpokenLanguage>,
-        @SerializedName("status") val mStatus: String,
-        @SerializedName("tagline") val mTagLine: String,
-        @SerializedName("title") var mTitle: String,
-        @SerializedName("video") val mVideo: Boolean,
-        @SerializedName("vote_average") val mVoteAverage: Double,
-        @SerializedName("vote_count") val mVoteCount: Long
-)
+open class MovieResponse(
+        @SerializedName("adult") var mAdult: Boolean = false,
+        @SerializedName("backdrop_path") var mBackdropPath: String = "",
+        //@SerializedName("belongs_to_collection") var mBelongsToCollection: Object = null,
+        @SerializedName("budget") var mBudget: Long = -1,
+        @SerializedName("genres") var mGenres: RealmList<MovieGenres>? = null,
+        @SerializedName("homepage") var mHomePage: String = "",
+        @PrimaryKey @SerializedName("id") var mId: Long = -1,
+        @SerializedName("imdb_id") var mImdbId: String = "",
+        @SerializedName("original_language") var mLanguage: String = "",
+        @SerializedName("original_title") var mOriginalTitle: String = "",
+        @SerializedName("overview") var mOverview: String = "",
+        @SerializedName("popularity") var mPopularity: Double = -0.1,
+        @SerializedName("poster_path") var mPosterPath: String = "",
+        @SerializedName("production_companies") var mMovieProductionCompanies: RealmList<MovieProductionCompanies>? = null,
+        @SerializedName("production_countries") var movieProductionCuntries: RealmList<MovieProductionCuntries>? = null,
+        @SerializedName("release_date") var mReleaseDate: String = "",
+        @SerializedName("revenue") var mRevenue: Long = -1,
+        @SerializedName("runtime") var mRuntime: Long = -1,
+        @SerializedName("spoken_language") var mMovieSpokenLanguage: RealmList<MovieSpokenLanguage>? = null,
+        @SerializedName("status") var mStatus: String = "",
+        @SerializedName("tagline") var mTagLine: String = "",
+        @SerializedName("title") var mTitle: String = "",
+        @SerializedName("video") var mVideo: Boolean = false,
+        @SerializedName("vote_average") var mVoteAverage: Double = -0.1,
+        @SerializedName("vote_count") var mVoteCount: Long = -1
+) : RealmObject()
 
 data class MovieSpokenLanguage(
-        @SerializedName("iso_639_1") val mIso: String,
-        @SerializedName("name") val mName: String
-)
+        @SerializedName("iso_639_1") var mIso: String = "",
+        @SerializedName("name") var mName: String = ""
+) : RealmObject()
 
 data class MovieCollection(
-        @SerializedName("id") val mId: Long,
-        @SerializedName("name") val mName: String,
-        @SerializedName("poster_path") val mPosterPath: String,
-        @SerializedName("backdrop_path") val mBackdropPath: String
-)
+        @SerializedName("id") var mId: Long = -1,
+        @SerializedName("name") var mName: String = "",
+        @SerializedName("poster_path") var mPosterPath: String = "",
+        @SerializedName("backdrop_path") var mBackdropPath: String = ""
+) : RealmObject()
 
 /*
 * genres - жанры
 * */
 data class MovieGenres(
-        @SerializedName("id") val mId: Long,
-        @SerializedName("name") val mName: String
-)
+        @SerializedName("id") var mId: Long = -1,
+        @SerializedName("name") var mName: String = ""
+) : RealmObject()
 
 data class MovieProductionCuntries(
-        @SerializedName("iso_3166_1") val mIso: String,
-        @SerializedName("name") val mName: String
-)
+        @SerializedName("iso_3166_1") var mIso: String = "",
+        @SerializedName("name") var mName: String = ""
+) : RealmObject()
 
 data class MovieProductionCompanies(
-        @SerializedName("name") val mName: String,
-        @SerializedName("id") val mId: Long
-)
+        @SerializedName("name") var mName: String = "",
+        @SerializedName("id") var mId: Long = -1
+) : RealmObject()

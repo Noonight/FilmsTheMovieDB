@@ -2,11 +2,17 @@ package com.example.admin.filmsthemoviedb.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoviePopularResponse {
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
+public class MoviePopularResponse extends RealmObject implements Serializable {
+
+    @PrimaryKey
     @SerializedName("page")
     private long mPage;
     @SerializedName("total_results")
@@ -14,13 +20,13 @@ public class MoviePopularResponse {
     @SerializedName("total_pages")
     private long mTotalPages;
     @SerializedName("results")
-    private List<MoviePopularResponseBody> mResults;
+    private RealmList<MoviePopularResponseBody> mResults;
 
-    public ArrayList<MoviePopularResponseBody> getResult() {
+    public List<MoviePopularResponseBody> getResult() {
         if (mResults == null)  {
             return new ArrayList<>();
         }
-        return (ArrayList<MoviePopularResponseBody>) mResults;
+        return mResults;
     }
 
     public long getmPage() {
@@ -51,7 +57,7 @@ public class MoviePopularResponse {
         return mResults;
     }
 
-    public void setmResults(List<MoviePopularResponseBody> mResults) {
+    public void setmResults(RealmList<MoviePopularResponseBody> mResults) {
         this.mResults = mResults;
     }
 }
