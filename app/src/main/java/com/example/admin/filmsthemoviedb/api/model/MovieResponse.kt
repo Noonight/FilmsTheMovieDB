@@ -9,7 +9,7 @@ import io.realm.annotations.PrimaryKey
 open class MovieResponse(
         @SerializedName("adult") var mAdult: Boolean = false,
         @SerializedName("backdrop_path") var mBackdropPath: String = "",
-        //@SerializedName("belongs_to_collection") var mBelongsToCollection: Object = null,
+        @SerializedName("belongs_to_collection") var mBelongsToCollection: String = "",
         @SerializedName("budget") var mBudget: Long = -1,
         @SerializedName("genres") var mGenres: RealmList<MovieGenres>? = null,
         @SerializedName("homepage") var mHomePage: String = "",
@@ -34,12 +34,12 @@ open class MovieResponse(
         @SerializedName("vote_count") var mVoteCount: Long = -1
 ) : RealmObject()
 
-data class MovieSpokenLanguage(
+open class MovieSpokenLanguage(
         @SerializedName("iso_639_1") var mIso: String = "",
         @SerializedName("name") var mName: String = ""
 ) : RealmObject()
 
-data class MovieCollection(
+open class MovieCollection(
         @SerializedName("id") var mId: Long = -1,
         @SerializedName("name") var mName: String = "",
         @SerializedName("poster_path") var mPosterPath: String = "",
@@ -49,17 +49,17 @@ data class MovieCollection(
 /*
 * genres - жанры
 * */
-data class MovieGenres(
+open class MovieGenres(
         @SerializedName("id") var mId: Long = -1,
         @SerializedName("name") var mName: String = ""
 ) : RealmObject()
 
-data class MovieProductionCuntries(
+open class MovieProductionCuntries(
         @SerializedName("iso_3166_1") var mIso: String = "",
         @SerializedName("name") var mName: String = ""
 ) : RealmObject()
 
-data class MovieProductionCompanies(
+open class MovieProductionCompanies(
         @SerializedName("name") var mName: String = "",
         @SerializedName("id") var mId: Long = -1
 ) : RealmObject()

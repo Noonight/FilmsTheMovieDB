@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.admin.filmsthemoviedb.R;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponse;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
+import com.example.admin.filmsthemoviedb.common.Log;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,10 @@ public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapte
     }
 
     public void setData(ArrayList<MoviePopularResponseBody> newMovies) {
+        Log.d(newMovies.toString());
+        for (MoviePopularResponseBody b : newMovies){
+            Log.d(b.getmTitle());
+        }
         mMovies.clear();
         mMovies.addAll(newMovies);
         notifyDataSetChanged();

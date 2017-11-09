@@ -3,6 +3,7 @@ package com.example.admin.filmsthemoviedb.mvp.view.movie;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +29,8 @@ public class MovieActivity extends AppCompatActivity implements MovieView{
     TextView mEtMovieTitle;
     @BindView(R.id.movie_post_iv)
     ImageView mIvMoviePost;
+    @BindView(R.id.loading_view)
+    FrameLayout mLoadingView;
 
     private MovieActivityPresenter presenter;
 
@@ -56,11 +59,12 @@ public class MovieActivity extends AppCompatActivity implements MovieView{
 
     @Override
     public void showProgress() {
-        mMovieDetail.setVisibility(View.GONE);
+        mLoadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
+        mLoadingView.setVisibility(View.GONE);
         mMovieDetail.setVisibility(View.VISIBLE);
     }
 
@@ -68,6 +72,8 @@ public class MovieActivity extends AppCompatActivity implements MovieView{
     public void showMessage(@NotNull String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+    public static final String IMAGe_URL = "";
 
     @Override
     public void bindMovie(MovieResponse movie) {

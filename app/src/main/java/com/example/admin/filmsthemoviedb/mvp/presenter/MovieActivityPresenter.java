@@ -3,6 +3,7 @@ package com.example.admin.filmsthemoviedb.mvp.presenter;
 
 import com.example.admin.filmsthemoviedb.api.NetworkManager;
 import com.example.admin.filmsthemoviedb.api.model.MovieResponse;
+import com.example.admin.filmsthemoviedb.common.Log;
 import com.example.admin.filmsthemoviedb.mvp.base.BasePresenter;
 import com.example.admin.filmsthemoviedb.mvp.view.movie.MovieView;
 
@@ -45,6 +46,6 @@ public class MovieActivityPresenter extends BasePresenter<MovieView> {
                 .doAfterTerminate(getView()::hideProgress)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(getView()::bindMovie, throwable -> getView().showMessage(throwable.getMessage()));
+                .subscribe(getView()::bindMovie, throwable -> Log.d(throwable.getMessage()));
     }
 }

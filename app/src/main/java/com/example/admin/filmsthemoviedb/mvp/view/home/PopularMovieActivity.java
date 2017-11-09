@@ -13,12 +13,14 @@ import android.widget.Toast;
 import com.example.admin.filmsthemoviedb.R;
 import com.example.admin.filmsthemoviedb.api.NetworkManager;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
+import com.example.admin.filmsthemoviedb.common.Log;
 import com.example.admin.filmsthemoviedb.mvp.presenter.PopularMovieActivityPresenter;
 import com.example.admin.filmsthemoviedb.mvp.view.movie.MovieActivity;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,17 +82,22 @@ public class PopularMovieActivity extends AppCompatActivity implements PopularMo
 
     @Override
     public void showProgress() {
-        mRequestRecycler.setVisibility(View.GONE);
+        mLoadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
+        mLoadingView.setVisibility(View.GONE);
         mRequestRecycler.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void setData(@NotNull ArrayList<MoviePopularResponseBody> data) {
-        adapter.setData(data);
+    public void setData(@NotNull List<MoviePopularResponseBody> data) {
+        Log.d(data.toString());
+        ArrayList<MoviePopularResponseBody> newData = new ArrayList<>();
+        newData.addAll(data);
+        Log.d(newData.toString());
+        adapter.setData(newData);
     }
 
     private int curentPage = 1;

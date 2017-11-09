@@ -33,8 +33,8 @@ public class MoviePopularResponseBody extends RealmObject implements Serializabl
     private String mOriginalLanguage;
     @SerializedName("original_title")
     private String mOriginalTitle;
-    @SerializedName("genre_ids")
-    private RealmList<RealmLong> mGenreIds;
+    /*@SerializedName("genre_ids")
+    private RealmList<RealmLong> mGenreIds;*/
     @SerializedName("backdrop_path")
     private String mBackdropPath;
     @SerializedName("adult")
@@ -116,13 +116,13 @@ public class MoviePopularResponseBody extends RealmObject implements Serializabl
         this.mOriginalTitle = mOriginalTitle;
     }
 
-    public RealmList<RealmLong> getmGenreIds() {
+    /*public RealmList<RealmLong> getmGenreIds() {
         return mGenreIds;
     }
 
     public void setmGenreIds(RealmList<RealmLong> mGenreIds) {
         this.mGenreIds = mGenreIds;
-    }
+    }*/
 
     public String getmBackdropPath() {
         return mBackdropPath;
