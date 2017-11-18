@@ -42,14 +42,14 @@ public class PopularMovieActivityPresenter extends BasePresenter<PopularMovieVie
                 })
                 .onErrorResumeNext(throwable -> {
                     Realm realm = Realm.getDefaultInstance();
-                    MoviePopularResponse defResponse = realm.where(MoviePopularResponse.class).equalTo("mPage", page).findFirst();
-                    return Observable.just(defResponse);
+                    MoviePopularResponse defResponse = realm.where(MoviePopularResponse.class).findFirst();
+                    return Observable.just(realm.copyFromRealm(defResponse));
                 })
                 .map(MoviePopularResponse::getResult)
                 .doOnSubscribe(getView()::showProgress)
                 .doAfterTerminate(getView()::hideProgress)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(getView()::setData, throwable -> Log.d(throwable.getMessage()));
+                .subscribe(getView()::setData, throwable -> getView().showError(throwable.getMessage()));
     }
 }

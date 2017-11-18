@@ -4,4 +4,5 @@
     <string name="send">Send</string>
     <string name="mock_data">Mock data here</string>
     <string name="please_wait">Please wait ...</string>
+    <string name="error_not_found">Error: Not found</string>
 </resources>

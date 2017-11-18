@@ -6,14 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.filmsthemoviedb.R;
 import com.example.admin.filmsthemoviedb.api.NetworkManager;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
 import com.example.admin.filmsthemoviedb.common.Log;
+import com.example.admin.filmsthemoviedb.common.loading.LoadingDialog;
+import com.example.admin.filmsthemoviedb.common.loading.LoadingView;
 import com.example.admin.filmsthemoviedb.mvp.presenter.PopularMovieActivityPresenter;
 import com.example.admin.filmsthemoviedb.mvp.view.movie.MovieActivity;
 
@@ -35,10 +39,14 @@ public class PopularMovieActivity extends AppCompatActivity implements PopularMo
     @BindView(R.id.loading_view)
     FrameLayout mLoadingView;
 
+    @BindView(R.id.error_message)
+    TextView mTvErrorMessage;
+
     private PopularMovieActivityPresenter presenter;
     private ProgressDialog progress;
     private NetworkManager mNetworkManager;
     private PopularMovieAdapter adapter;
+    private LoadingView loadingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +70,12 @@ public class PopularMovieActivity extends AppCompatActivity implements PopularMo
 
         adapter = new PopularMovieAdapter();
         adapter.setmOnItemClick(item -> {
-            Toast.makeText(PopularMovieActivity.this, "Title : " + item.getmTitle(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(PopularMovieActivity.this, "Title : " + item.getmTitle(), Toast.LENGTH_SHORT).show();
             openMovieActivity(item);
         });
         mRequestRecycler.setAdapter(adapter);
+
+        loadingView = LoadingDialog.view(getSupportFragmentManager());
 
         initPresenter();
     }
@@ -82,13 +92,16 @@ public class PopularMovieActivity extends AppCompatActivity implements PopularMo
 
     @Override
     public void showProgress() {
-        mLoadingView.setVisibility(View.VISIBLE);
+        loadingView.showLoadingDialog();
+        //mLoadingView.setVisibility(View.VISIBLE);
+        //mRequestRecycler.setVisibility(View.GONE);
     }
 
     @Override
     public void hideProgress() {
-        mLoadingView.setVisibility(View.GONE);
-        mRequestRecycler.setVisibility(View.VISIBLE);
+        loadingView.hideLoadingDialog();
+        //mLoadingView.setVisibility(View.GONE);
+        //mRequestRecycler.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -119,5 +132,16 @@ public class PopularMovieActivity extends AppCompatActivity implements PopularMo
     @Override
     public void showMessage(@NotNull String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showError(@NotNull String error) {
+        if (!TextUtils.isEmpty(error)) {
+            mTvErrorMessage.setText(error);
+        }
+        loadingView.hideLoadingDialog();
+        //mLoadingView.setVisibility(View.GONE);
+        mTvErrorMessage.setVisibility(View.VISIBLE);
+        //mRequestRecycler.setVisibility(View.GONE);
     }
 }

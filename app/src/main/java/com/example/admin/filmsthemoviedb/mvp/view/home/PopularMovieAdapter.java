@@ -1,6 +1,7 @@
 package com.example.admin.filmsthemoviedb.mvp.view.home;
 
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.filmsthemoviedb.R;
-import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponse;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
 import com.example.admin.filmsthemoviedb.common.Log;
 
@@ -65,9 +65,13 @@ public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapte
         @BindView(R.id.list_item_poster)
         ImageView mIvListItemPoster;
         @BindView(R.id.list_item_title)
-        TextView mEtListItemTitle;
+        TextView mTvListItemTitle;
         @BindView(R.id.movies_item_recycler)
         LinearLayout mItemView;
+        @BindView(R.id.list_item_description)
+        TextView mTvListItemDescription;
+        @BindView(R.id.list_item_creator)
+        TextView mTvListitemCreator;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -78,8 +82,11 @@ public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapte
             Glide.with(itemView)
                     .load( IMAGE_URL + item.getmPosterPath())
                     .into(mIvListItemPoster);
-            mEtListItemTitle.setText(item.getmTitle());
+            mTvListItemTitle.setText(item.getmTitle());
             mItemView.setOnClickListener(view -> listener.onClickItem(item));
+            mTvListItemDescription.setText(item.getmOverview());
+            mTvListitemCreator.setText("Rating: " + String.valueOf(item.getmVoteAverage()));
+            mTvListitemCreator.setTextColor(Color.RED); // TODO:  Delete it
         }
     }
 

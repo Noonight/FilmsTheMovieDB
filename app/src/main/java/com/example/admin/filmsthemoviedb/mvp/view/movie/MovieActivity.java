@@ -2,6 +2,7 @@ package com.example.admin.filmsthemoviedb.mvp.view.movie;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -13,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.example.admin.filmsthemoviedb.R;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
 import com.example.admin.filmsthemoviedb.api.model.MovieResponse;
+import com.example.admin.filmsthemoviedb.common.loading.LoadingDialog;
+import com.example.admin.filmsthemoviedb.common.loading.LoadingView;
 import com.example.admin.filmsthemoviedb.mvp.presenter.MovieActivityPresenter;
 import com.example.admin.filmsthemoviedb.mvp.view.home.PopularMovieAdapter;
 
@@ -31,8 +34,11 @@ public class MovieActivity extends AppCompatActivity implements MovieView{
     ImageView mIvMoviePost;
     @BindView(R.id.loading_view)
     FrameLayout mLoadingView;
+    @BindView(R.id.error_message)
+    TextView mTvErrorMessage;
 
     private MovieActivityPresenter presenter;
+    private LoadingView loadingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,7 @@ public class MovieActivity extends AppCompatActivity implements MovieView{
 
     private void init() {
         ButterKnife.bind(this);
+        loadingView = LoadingDialog.view(getSupportFragmentManager());
         initPresenter();
     }
 
@@ -59,13 +66,16 @@ public class MovieActivity extends AppCompatActivity implements MovieView{
 
     @Override
     public void showProgress() {
-        mLoadingView.setVisibility(View.VISIBLE);
+        loadingView.showLoadingDialog();
+        //mMovieDetail.setVisibility(View.GONE);
+        //mLoadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-        mLoadingView.setVisibility(View.GONE);
-        mMovieDetail.setVisibility(View.VISIBLE);
+        loadingView.hideLoadingDialog();
+//        mLoadingView.setVisibility(View.GONE);
+//        mMovieDetail.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -81,5 +91,16 @@ public class MovieActivity extends AppCompatActivity implements MovieView{
         Glide.with(mIvMoviePost)
                 .load(PopularMovieAdapter.IMAGE_URL + movie.getMPosterPath())
                 .into(mIvMoviePost);
+    }
+
+    @Override
+    public void showError(@NotNull String error) {
+        if (!TextUtils.isEmpty(error)) {
+            mTvErrorMessage.setText(error);
+        }
+        mTvErrorMessage.setVisibility(View.VISIBLE);
+        loadingView.hideLoadingDialog();
+        //mLoadingView.setVisibility(View.GONE);
+        //mMovieDetail.setVisibility(View.GONE);
     }
 }

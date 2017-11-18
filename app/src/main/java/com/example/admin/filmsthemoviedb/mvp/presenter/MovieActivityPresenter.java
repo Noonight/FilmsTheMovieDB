@@ -40,12 +40,12 @@ public class MovieActivityPresenter extends BasePresenter<MovieView> {
                 .onErrorResumeNext(throwable -> {
                     Realm realm = Realm.getDefaultInstance();
                     MovieResponse defResponse = realm.where(MovieResponse.class).equalTo("mId", movieId).findFirst();
-                    return Observable.just(defResponse);
+                    return Observable.just(realm.copyFromRealm(defResponse));
                 })
                 .doOnSubscribe(getView()::showProgress)
                 .doAfterTerminate(getView()::hideProgress)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(getView()::bindMovie, throwable -> Log.d(throwable.getMessage()));
+                .subscribe(getView()::bindMovie, throwable -> getView().showError(throwable.getMessage()));
     }
 }
