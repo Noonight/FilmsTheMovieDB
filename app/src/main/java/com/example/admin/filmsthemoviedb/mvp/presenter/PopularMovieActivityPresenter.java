@@ -1,6 +1,7 @@
 package com.example.admin.filmsthemoviedb.mvp.presenter;
 
 
+import com.example.admin.filmsthemoviedb.api.ApiService;
 import com.example.admin.filmsthemoviedb.api.NetworkManager;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponse;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
@@ -9,6 +10,8 @@ import com.example.admin.filmsthemoviedb.mvp.base.BasePresenter;
 import com.example.admin.filmsthemoviedb.mvp.view.home.PopularMovieView;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import io.realm.Realm;
 import rx.Observable;
@@ -19,6 +22,13 @@ import rx.schedulers.Schedulers;
 public class PopularMovieActivityPresenter extends BasePresenter<PopularMovieView> {
 
     private NetworkManager mNetworkManager;
+
+    private ApiService mApiService;
+
+    @Inject
+    public PopularMovieActivityPresenter(ApiService mApiService) {
+        this.mApiService = mApiService;
+    }
 
     @Override
     protected void updateView() {

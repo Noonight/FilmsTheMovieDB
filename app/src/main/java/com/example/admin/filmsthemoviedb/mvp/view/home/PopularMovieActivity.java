@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.admin.filmsthemoviedb.App;
 import com.example.admin.filmsthemoviedb.R;
 import com.example.admin.filmsthemoviedb.api.NetworkManager;
 import com.example.admin.filmsthemoviedb.api.model.MoviePopularResponseBody;
@@ -25,6 +26,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +45,9 @@ public class PopularMovieActivity extends AppCompatActivity implements PopularMo
     @BindView(R.id.error_message)
     TextView mTvErrorMessage;
 
-    private PopularMovieActivityPresenter presenter;
+    @Inject
+    PopularMovieActivityPresenter presenter;
+
     private ProgressDialog progress;
     private NetworkManager mNetworkManager;
     private PopularMovieAdapter adapter;
@@ -54,7 +59,7 @@ public class PopularMovieActivity extends AppCompatActivity implements PopularMo
         setContentView(R.layout.activity_home);
 
         ButterKnife.bind(this);
-
+        App.getComponent(this).inject(this);
         init();
     }
 
@@ -81,7 +86,6 @@ public class PopularMovieActivity extends AppCompatActivity implements PopularMo
     }
 
     private void initPresenter() {
-        presenter = new PopularMovieActivityPresenter();
         presenter.attachView(this);
     }
 

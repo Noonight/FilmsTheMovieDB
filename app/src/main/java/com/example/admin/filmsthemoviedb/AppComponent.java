@@ -1,4 +1,4 @@
-package com.example.admin.filmsthemoviedb.dagger;
+package com.example.admin.filmsthemoviedb;
 
 import com.example.admin.filmsthemoviedb.mvp.view.home.PopularMovieActivity;
 
